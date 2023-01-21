@@ -1,6 +1,6 @@
 [project]
 name = "ersci-card"
-version = "1.1"
+version = "1.2"
 authors = [
   { name="ep ersci", email="epg900@gmail.com" },
 ]
