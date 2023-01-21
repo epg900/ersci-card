@@ -2,8 +2,7 @@
 Ecard
 =====
 Ecard is a Django app to create personeli card. 
-For each user,
- create a card and export it as pdf and docx documents.
+For each user,create a card and export it as pdf and docx documents.
 
 Quick start
 -----------
