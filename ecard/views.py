@@ -23,9 +23,9 @@ if platform.system() == "Windows":
 ####################################################################
 def index(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:		
-		return render(request, 'ou.html')
+		return render(request, 'ecard/ou.html')
 	except:
 		raise Http404("Not Found")
 ####################################################################
@@ -50,14 +50,14 @@ def signin(request):
                 login(request , user)
                 return redirect ('/ecard')
             else:
-                return render(request, 'login.html')
+                return render(request, 'ecard/login.html')
     except:
-        return render(request, 'login.html')
-    return render(request, 'login.html')
+        return render(request, 'ecard/login.html')
+    return render(request, 'ecard/login.html')
 ####################################################################
 def signup(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 		if request.method == 'POST':
 			form = User1form(request.POST , request.FILES )
@@ -66,19 +66,19 @@ def signup(request):
 				#instance.pic.name="images/{}.png".format(instance.id)
 				#instance.save()
 				form.save()
-				return render(request, 'ou.html', {'memo':'کاربر ساخته شد', 'var1' : 1 })
+				return render(request, 'ecard/ou.html', {'memo':'کاربر ساخته شد', 'var1' : 1 })
 			else:
-			    return render(request, 'ou.html', {'memo':'خطا در ساخت کاربر', 'var1': 1 })
+			    return render(request, 'ecard/ou.html', {'memo':'خطا در ساخت کاربر', 'var1': 1 })
 		else:
 				form = User1form()
-				return render(request, 'ou.html', {'form': form ,  'dest' : 'signup' ,'idx' : 1 , 'var1' : 2  })
+				return render(request, 'ecard/ou.html', {'form': form ,  'dest' : 'signup' ,'idx' : 1 , 'var1' : 2  })
 	except:
 		pass
 	return redirect("/ecard")
 ####################################################################
 def changepass(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	#try:
 	if request.method == 'POST':
 		form = PasswordChangeForm(request.user, request.POST)
@@ -88,19 +88,19 @@ def changepass(request):
 			#instance.save()
 			form.save()
 			update_session_auth_hash(request, form.user)
-			return render(request, 'ou.html', {'memo':'گذرواژه شما با موفقیت تغییر یافت', 'var1' : 1 })
+			return render(request, 'ecard/ou.html', {'memo':'گذرواژه شما با موفقیت تغییر یافت', 'var1' : 1 })
 		else:
-		    return render(request, 'ou.html', {'memo':'خطا در تغییر گذرواژه', 'var1': 1 })
+		    return render(request, 'ecard/ou.html', {'memo':'خطا در تغییر گذرواژه', 'var1': 1 })
 	else:
 			form = PasswordChangeForm(request.user)
-			return render(request, 'ou.html', {'form': form ,  'dest' : 'changepass' ,'idx' : 1 , 'var1' : 2  })
+			return render(request, 'ecard/ou.html', {'form': form ,  'dest' : 'changepass' ,'idx' : 1 , 'var1' : 2  })
 	#except:
 	#	pass
 	return redirect("/ecard")
 ####################################################################
 def printcard(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 		doc = DocxTemplate("1.docx")
 		user = User1.objects.all()
@@ -127,7 +127,7 @@ def printcard(request):
 ####################################################################
 def printcard2(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 		doc = DocxTemplate("1.docx")
 		user = User1.objects.all()
@@ -170,23 +170,23 @@ def printcard2(request):
 ####################################################################
 def userlist(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 	    if request.method == 'POST':
 	        data = request.POST['idnum']
 	        userlist=User1.objects.filter(name__contains = data ).order_by('number')
-	        return render(request, 'ou.html', {'data': data , 'userlist' : userlist , 'var1' : 3 })
+	        return render(request, 'ecard/ou.html', {'data': data , 'userlist' : userlist , 'var1' : 3 })
 	    else:
 	        data = ""
 	        userlist=User1.objects.all().order_by('number')
-	        return render(request, 'ou.html', {'data': data , 'userlist' : userlist , 'var1' : 3 })
+	        return render(request, 'ecard/ou.html', {'data': data , 'userlist' : userlist , 'var1' : 3 })
 	except:
 		pass
 	return redirect("/ecard")
 ####################################################################
 def edituser(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 		if request.method == 'POST':
 			idx = request.POST['idnum']
@@ -194,21 +194,21 @@ def edituser(request):
 			form =User1form(request.POST , request.FILES ,  instance = ins1)
 			if form.is_valid():
 				form.save()
-				return render(request, 'ou.html', {'memo': 'ویرایش انجام شد' , 'var1' : 1 })
+				return render(request, 'ecard/ou.html', {'memo': 'ویرایش انجام شد' , 'var1' : 1 })
 			else:
-			    return render(request, 'ou.html', {'memo': 'خطا در ویرایش کاربر', 'var1': 1 })
+			    return render(request, 'ecard/ou.html', {'memo': 'خطا در ویرایش کاربر', 'var1': 1 })
 		else:
 				idx = request.GET['id']
 				ins1=User1.objects.get(id = idx)
 				form =User1form(instance = ins1)
-				return render(request, 'ou.html', {'form': form ,  'dest' : 'edituser' ,'idx' : idx , 'var1' : 2  })
+				return render(request, 'ecard/ou.html', {'form': form ,  'dest' : 'edituser' ,'idx' : idx , 'var1' : 2  })
 	except:
 	    return redirect("/ecard")
 	return redirect("/ecard")
 ####################################################################
 def deluser(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 		if request.method == 'GET':
 			idx = request.GET['id']
@@ -219,7 +219,7 @@ def deluser(request):
 ####################################################################
 def uploadtpl(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html')
+		return render (request,'ecard/login.html')
 	try:
 		if request.method == 'POST':
 			f=request.FILES['file']
@@ -230,16 +230,16 @@ def uploadtpl(request):
 			with open("2.docx", 'wb') as destination:
 				for chunk in f2.chunks():
 				    destination.write(chunk)
-			return render(request, 'ou.html',{'memo' : 'فایل آپلود شد!' , 'var1' : 1 })
+			return render(request, 'ecard/ou.html',{'memo' : 'فایل آپلود شد!' , 'var1' : 1 })
 		else:
-			return render(request, 'ou.html', {'var1' : 7 })
+			return render(request, 'ecard/ou.html', {'var1' : 7 })
 	except:
 		pass
 	return render(request, 'ou.html', {'memo': 'خطا در سرور' , 'var1' : 1 })
 ###################################################################
 def printalluser(request):
 	if not request.user.is_authenticated:
-		return render (request,'login.html' )
+		return render (request,'ecard/login.html' )
 	try:
 		doc = DocxTemplate("2.docx")
 		user = User1.objects.all().order_by('number')
