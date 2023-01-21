@@ -110,13 +110,13 @@ def printcard(request):
 				pic[u.id] = InlineImage(doc, image_descriptor = u.pic.path , width=Mm(30), height=Mm(40))
 		context = {"user" : user  , "pic" : pic }
 		doc.render(context)
-		doc.save(os.path.join(settings.BASE_DIR, "aa.docx"))
+		doc.save("aa.docx")
 		del doc
 		if platform.system() == "Windows":
 			os.system("docx2pdf {}".format('aa.docx'))
 		if platform.system() == "Linux":
-			os.system("lowriter --convert-to pdf  {}".format(os.path.join(settings.BASE_DIR, "aa.docx")))
-		f = open(os.path.join(settings.BASE_DIR,"aa.pdf"), 'rb')
+			os.system("lowriter --convert-to pdf  {}".format("aa.docx"))
+		f = open("aa.pdf", 'rb')
 		pdf_contents = f.read()
 		f.close()
 		response = HttpResponse(pdf_contents, content_type='application/pdf')
@@ -143,17 +143,17 @@ def printcard2(request):
 				pic[u.id] = InlineImage(doc, image_descriptor = u.pic.path , width=Mm(30), height=Mm(40))
 		context = {"user" : user  , "pic" : pic }
 		doc.render(context)
-		doc.save(os.path.join(settings.BASE_DIR, "aa.docx"))
+		doc.save("aa.docx")
 		del doc
 		if platform.system() == "Windows":
 			os.system("docx2pdf {}".format('aa.docx'))
 		if platform.system() == "Linux":
-			os.system("lowriter --convert-to pdf  {}".format(os.path.join(settings.BASE_DIR, "aa.docx")))
+			os.system("lowriter --convert-to pdf  {}".format("aa.docx"))
 		chk=request.GET["ftype"]
 		if chk == "1" :
-			f = open(os.path.join(settings.BASE_DIR,"aa.pdf"), 'rb')
+			f = open("aa.pdf", 'rb')
 		if chk == "2" :
-			f = open(os.path.join(settings.BASE_DIR,"aa.docx"), 'rb')
+			f = open("aa.docx", 'rb')
 		pdf_contents = f.read()
 		f.close()
 		if chk == "1" :
@@ -245,14 +245,14 @@ def printalluser(request):
 		user = User1.objects.all().order_by('number')
 		context = {"user" : user }
 		doc.render(context)
-		doc.save(os.path.join(settings.BASE_DIR, "aa.docx"))
+		doc.save("aa.docx")
 		del doc
 		if platform.system() == "Windows":
 			os.system("docx2pdf {}".format('aa.docx'))
 		if platform.system() == "Linux":
-			os.system("lowriter --convert-to pdf  {}".format(os.path.join(settings.BASE_DIR, "aa.docx")))
+			os.system("lowriter --convert-to pdf  {}".format("aa.docx")))
 		#f = open(os.path.join(Path(__file__).resolve().parent.parent,"aa.pdf"), 'rb')
-		f = open(os.path.join(settings.BASE_DIR,"aa.pdf"), 'rb')
+		f = open("aa.pdf", 'rb')
 		pdf_contents = f.read()
 		f.close()
 		response = HttpResponse(pdf_contents, content_type='application/pdf')
