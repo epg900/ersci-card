@@ -7,7 +7,7 @@ from django.contrib.auth.forms import PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
-import os,random,json,requests
+import os,random,json
 from .forms import User1form
 from .models import User1
 from docxtpl import DocxTemplate
